@@ -1,23 +1,37 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { BlogPost } from "../types/Blog";
+import { useState } from "react";
+
 import BlogCard from "../components/BlogCard";
-import { getAllBlogPosts } from "../api/blogApi";
+
+import Input from "../components/forms/Input";
+import { useGetBlogPosts } from "../hooks/useGetBlogPosts";
 
 function BlogPage() {
-  const [posts, setPosts] = useState<BlogPost[]>([]);
+  const [searchInput, setSearchInput] = useState("");
+  /* const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     getAllBlogPosts()
       .then((res) => setPosts(res.data))
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(() => setLoading(false));
   }, []);
   console.log(posts);
+ */
+
+  const { posts, isLoading, isError, error } = useGetBlogPosts();
 
   return (
     <div>
       <h1 className="text-3xl">hello blog Page</h1>
-      <div className="flex gap-3">
-        {posts.map((post) => (
+      <Input
+        id="search"
+        label="search"
+        onChange={(e) => setSearchInput(e.target.value)}
+        value={searchInput}
+      />
+      {isLoading && <h1 className="text-4xl">LOADING!!!!!</h1>}
+      <div className="flex gap-3 container flex-wrap">
+        {posts?.data.map((post) => (
           <BlogCard key={post.id} {...post} />
         ))}
       </div>

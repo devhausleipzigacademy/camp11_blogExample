@@ -9,6 +9,11 @@ import DashboardLayout from "./layouts/DashboardLayout.tsx";
 import DashboardPage from "./pages/DashboardPage.tsx";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import BlogPostProvider from "./context/BlogPostProvider.tsx";
+
+const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
@@ -42,8 +47,10 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <>
-    <RouterProvider router={router} />
+  <QueryClientProvider client={queryClient}>
+    <BlogPostProvider>
+      <RouterProvider router={router} />
+    </BlogPostProvider>
     <ToastContainer
       position="bottom-right"
       autoClose={3000}
@@ -56,5 +63,6 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       pauseOnHover
       theme="light"
     />
-  </>
+    <ReactQueryDevtools initialIsOpen={false} />
+  </QueryClientProvider>
 );

@@ -1,10 +1,18 @@
-import React from "react";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 
 function DashboardLayout() {
   return (
     <div>
-      <aside>hello aside</aside>
+      <aside>
+        <ul>
+          <li>
+            <Link to="/dashboard">Dashboard</Link>
+          </li>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+        </ul>
+      </aside>
       <header>hello header</header>
       <main>
         <Outlet />

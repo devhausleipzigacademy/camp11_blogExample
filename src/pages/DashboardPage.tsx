@@ -1,17 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Input from "../components/forms/Input";
 import Textarea from "../components/forms/Textarea";
 import Button from "../components/forms/Button";
-import axios from "axios";
-import { type BlogPost } from "../types/Blog";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { createBlogPost } from "../api/blogApi";
+import { QueryClient, useMutation } from "@tanstack/react-query";
+import { BlogPostContext } from "../context/BlogPostProvider";
 
 // when I hit submit btn I want to console log the current value of Input and also of my Textarea
 
 function DashboardPage() {
+  const queryClient = new QueryClient();
   const navigate = useNavigate();
+
+  const { mutate } = useMutation({
+    mutationFn: async () => await createBlogPost(inputVal),
+    onSuccess: () => {
+      toast.success("Blog post created successfully");
+      navigate("/blog");
+      // Invalidate and refetch
+      queryClient.invalidateQueries({ queryKey: ["blogPosts"] });
+    },
+    onError: (error) => {
+      toast.error("Error creating blog post");
+    },
+  });
 
   const [inputVal, setInputVal] = useState({
     title: "",
@@ -20,15 +34,7 @@ function DashboardPage() {
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-
-    try {
-      const { data } = await createBlogPost(inputVal);
-      console.log(data);
-      toast.success("Post created successfully!");
-      navigate("/blog");
-    } catch (e) {
-      toast.error("Something went wrong, please try again later.");
-    }
+    mutate();
   }
 
   return (

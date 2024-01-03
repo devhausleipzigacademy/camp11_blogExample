@@ -1,10 +1,24 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 
 function RootLayout() {
   return (
     <div>
-      <header>Hai friends</header>
+      <header>
+        <nav>
+          <ul>
+            <li>
+              <NavLink to="/">Home</NavLink>
+            </li>
+            <li>
+              <NavLink to="/blog">Blog</NavLink>
+            </li>
+            <li>
+              <NavLink to="/dashboard">Dashboard</NavLink>
+            </li>
+          </ul>
+        </nav>
+      </header>
       <main>
         <Outlet />
       </main>
