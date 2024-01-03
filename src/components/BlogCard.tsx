@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { type BlogPost } from "../types/Blog";
 import Button from "./forms/Button";
 
@@ -7,7 +8,7 @@ function BlogCard({ content, id, title }: BlogPost) {
       <h3 className="text-2xl font-bold text-neutral-700">{title}</h3>
       <p className="text-md text-neutral-500">{content.slice(0, 150)}...</p>
 
-      <Button size="lg">Read More</Button>
+      <Link to={`/blog/${id}`}>Read More</Link>
     </div>
   );
 }

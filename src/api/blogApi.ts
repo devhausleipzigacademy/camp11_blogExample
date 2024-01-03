@@ -20,3 +20,7 @@ export async function getAllBlogPosts() {
 export async function createBlogPost(blogPostData: Omit<BlogPost, "id">) {
   return await axios.post<BlogPost>(URL, blogPostData);
 }
+
+export async function getSingleBlogPost(id: string) {
+  return (await axios.get<BlogPost>(`${URL}/${id}`)).data;
+}

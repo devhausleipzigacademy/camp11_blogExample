@@ -12,6 +12,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import BlogPostProvider from "./context/BlogPostProvider.tsx";
+import SingleBlogPage from "./pages/SingleBlogPage.tsx";
 
 const queryClient = new QueryClient();
 
@@ -26,7 +27,16 @@ const router = createBrowserRouter([
       },
       {
         path: "blog",
-        element: <BlogPage />,
+        children: [
+          {
+            index: true,
+            element: <BlogPage />,
+          },
+          {
+            path: ":blogId",
+            element: <SingleBlogPage />,
+          },
+        ],
       },
     ],
   },

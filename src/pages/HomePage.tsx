@@ -19,7 +19,8 @@ function HomePage() {
       .finally(() => setLoading(false));
   }, []);
  */
-  const { posts, isLoading } = useContext(BlogPostContext);
+  //const { posts, isLoading } = useContext(BlogPostContext);
+  const { posts, isLoading, isError, error } = useGetBlogPosts();
 
   return (
     <div>
@@ -27,7 +28,7 @@ function HomePage() {
       <h3 className="text-2xl">The last recent BlogPosts</h3>
       {isLoading && <h1 className="text-4xl">Loading...</h1>}
       <div className="flex gap-3">
-        {posts.splice(-3).map((post) => (
+        {posts?.data.splice(-3).map((post) => (
           <BlogCard key={post.id} {...post} />
         ))}
       </div>
