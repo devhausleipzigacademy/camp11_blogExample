@@ -1,4 +1,41 @@
 {
+  "comments": [
+    {
+      "id": 1,
+      "postId": 1,
+      "author": "Franz",
+      "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
+      "replyId": null
+    },
+    {
+      "id": 2,
+      "postId": 1,
+      "author": "Franz",
+      "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
+      "replyId": 1
+    },
+    {
+      "content": "test comment",
+      "postId": 1,
+      "author": "Franz",
+      "replyId": null,
+      "id": 3
+    },
+    {
+      "content": "next level down",
+      "postId": 1,
+      "author": "Franz",
+      "replyId": 2,
+      "id": 4
+    },
+    {
+      "content": "next level down",
+      "postId": 1,
+      "author": "Franz",
+      "replyId": 4,
+      "id": 5
+    }
+  ],
   "posts": [
     {
       "id": 1,
